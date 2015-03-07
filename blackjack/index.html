@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="game">
+	<head>
+		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"/>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+
+		<script
+        type="text/javascript"
+        src="http://code.jquery.com/jquery-2.0.3.min.js">
+    	</script>
+		<script
+        type="text/javascript"
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js">
+        </script>
+        <script
+		type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js">
+		</script>
+
+		<script
+		type="text/javascript"
+		src="game.js">
+		</script>
+		<script
+		type="text/javascript"
+		src="dealerEngine.js">
+		</script>
+
+		<!-- <link rel="stylesheet" type="text/css" href="style.css"/> -->
+	</head>
+
+	<body>
+		<div class="game" ng-controller="gameController as game">
+
+			<div class="gameResult">Game Status: {{gameState}}</div>
+			<div class="gameTurn">Turn: {{currentPlayer()}}</div>
+			<div class="gameUpdates">Move: {{gameUpdates}}</div>
+
+			<script>toastr.success("please click 'Deal'", 'To start game')</script>
+			<button class="button" ng-click="deal()" ng-disabled={{gameStarted}}>Deal</button>
+			<button class="button" ng-click="playerHit()">hit</button>
+			<button class="button" ng-click="playerStand()">stand</button>
+			<button class="button" ng-click="playerSplit()" ng-disabled={{gameStarted}}>Split</button>
+
+			<div class="cardpanel" id="playerPanel" ng-controller="playerPanelController as playerPanelCtrl">
+				<h3> Player </h3>
+				<div class="card" id="playerCards" ng-repeat="card in playerCardsFromFactory.playerCards">
+					<p> {{card.type}}</p>
+					<p> {{card.value}}</p>
+				</div>
+			</div>
+
+			<div class="cardpanel" id="dealerPanel" ng-controller="dealerPanelController as dealer">
+				<h3> Dealer </h3>
+				<div class="card" id="dealerCardsDiv" ng-repeat="card in dealerCardsFromFactory.dealerCards">
+					<p ng-show="card.faceup"> {{card.type}} </p>
+					<p ng-show="card.faceup"> {{card.value}} </p>
+					<p ng-hide="card.faceup"> x </p>
+					<p ng-hide="card.faceup"> x </p>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>

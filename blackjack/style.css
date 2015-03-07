@@ -1,0 +1,13 @@
+.card {
+  border: 1px solid red;
+  margin: 3px;
+  width: 100px;
+  height: 160px;
+  border-radius: 10px;
+  display: inline-block
+}
+
+.cardpanel {
+	display: block;
+	height: 200px;
+}
